@@ -11,6 +11,7 @@ private:
 	unsigned int computerscore = 0;
 	unsigned int tiescore = 0;
 	void printscore();
+	unsigned int gameresult(unsigned int x, unsigned int y);
 };
 
 #endif

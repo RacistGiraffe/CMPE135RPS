@@ -5,7 +5,7 @@ using namespace std;
 /*
  * TODO:
  * Add difficulty of computer (in the next assignment) - this requires us to make constructors for it too
- * If the Game class gets too crowded, create a scoreboard class
+ * Maybe create a scoreboard class to increase cohesion
  * When more difficulties are added, make the computer class immutable
  * Maybe rename variables to be better
  * If needed, add methods to change length of game
@@ -19,4 +19,3 @@ int main() {
 	newgame.play();
 	return 0;
 }
-

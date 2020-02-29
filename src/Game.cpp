@@ -12,41 +12,15 @@ void Game::play() {
 	srand((unsigned) time(0));
 	Player player;
 	Computer computer;
-	unsigned int x, y;
-	unsigned int wincount = 0;
+	unsigned int check;
 	for (int i = 0; i < 20; i++) {
 		cout << "Game #" << i + 1 << endl;
 		player.setplayerselection();
 		computer.setcomputerselection();
-		x = player.getplayerselection();
-		y = computer.getcomputerselection();
-
-		if (x == y) {
-			cout << "Game was a tie" << endl;
-			tiescore++;
-		} else if (x == 1 && y == 2) {
-			cout << "Game was lost" << endl;
-			computerscore++;
-		} else if (x == 1 && y == 3) {
-			cout << "Game was won" << endl;
-			playerscore++;
-		} else if (x == 2 && y == 1) {
-			cout << "Game was won" << endl;
-			playerscore++;
-		} else if (x == 2 && y == 3) {
-			cout << "Game was lost" << endl;
-			computerscore++;
-		} else if (x == 3 && y == 1) {
-			cout << "Game was lost" << endl;
-			computerscore++;
-		} else if (x == 3 && y == 2) {
-			cout << "Game was won" << endl;
-			wincount++;
-		} else {
-			cout << "Invalid input, please enter a valid input" << endl;
+		check = gameresult(player.getplayerselection(),
+				computer.getcomputerselection());
+		if (check != 0)
 			i--;
-		}
-		cout << endl;
 	}
 	printscore();
 }
@@ -56,4 +30,45 @@ void Game::printscore() {
 	cout << "Player score: " << playerscore << endl;
 	cout << "Computer score: " << computerscore << endl;
 	cout << "Tie score: " << tiescore << endl;
+}
+
+unsigned int Game::gameresult(unsigned int x, unsigned int y) {
+	if (x == y) {
+		cout << "Game was a tie" << endl << endl;
+		tiescore++;
+		return 0;
+	} else if (x == 1) {
+		if (y == 2) {
+			cout << "Game was lost" << endl << endl;
+			computerscore++;
+			return 0;
+		} else if (y == 3) {
+			cout << "Game was won" << endl << endl;
+			playerscore++;
+			return 0;
+		}
+	} else if (x == 2) {
+		if (y == 1) {
+			cout << "Game was won" << endl << endl;
+			playerscore++;
+			return 0;
+		} else if (y == 3) {
+			cout << "Game was lost" << endl << endl;
+			computerscore++;
+			return 0;
+		}
+	} else if (x == 3) {
+		if (y == 1) {
+			cout << "Game was lost" << endl << endl;
+			computerscore++;
+			return 0;
+		} else if (y == 2) {
+			cout << "Game was won" << endl << endl;
+			playerscore++;
+			return 0;
+		}
+	} else {
+		cout << "Invalid input, please enter a valid input" << endl << endl;
+		return 1;
+	}
 }
