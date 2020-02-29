@@ -19,8 +19,12 @@ void Game::play() {
 		computer.setcomputerselection();
 		check = gameresult(player.getplayerselection(),
 				computer.getcomputerselection());
-		if (check != 0)
+		if (check == 1)
 			i--;
+		else if (check == 2){
+			cout << "Something went wrong, fatal error, ending program." << endl;
+			break;
+		}
 	}
 	printscore();
 }
@@ -71,4 +75,5 @@ unsigned int Game::gameresult(unsigned int x, unsigned int y) {
 		cout << "Invalid input, please enter a valid input" << endl << endl;
 		return 1;
 	}
+	return 2;
 }
