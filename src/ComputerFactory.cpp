@@ -4,14 +4,10 @@
 
 Computer *ComputerFactory::difficulty(int diff)
 {
-	if(diff == 1) {
-		cout << "Creating Random Computer" << endl;
+	if(diff == 1)
 		return new RandomComputer();
-	}
-	else if (diff == 2) {
-		cout << "Creating ML Computer" << endl;
+	else if (diff == 2)
 		return new MLComputer();
-	}
 	else
 		return NULL;
 }

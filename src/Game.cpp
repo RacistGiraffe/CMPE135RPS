@@ -18,8 +18,8 @@ void Game::play() {
 	History history;
 	unsigned int check;
 
-	cout << "Please select computer difficulty: " << endl;
-	cout << "1. Easy, 2. Hard" << endl;
+	cout << "1. Easy \t" << "2. Hard" << endl;
+	cout << "Please select computer difficulty: ";
 	cin >> botdiff;
 
 	Computer *computer;

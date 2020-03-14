@@ -7,7 +7,6 @@ unsigned int Player::playerselection;
 void MLComputer::setcomputerselection()
 {
 	//Check if history is filled
-	history.printhistory();
 	int *temp = {history.gethistory()};
 
 	//Check to see if more values can be added to history first.
@@ -16,6 +15,7 @@ void MLComputer::setcomputerselection()
 			if(i == 4)
 				history.addhistory(4, Player::getplayerselection());
 			else {
+				srand((unsigned) time(0));
 				history.addhistory(i, Player::getplayerselection());
 				computerselection = (rand() % 3) + 1;
 				//Add value of player to history
@@ -38,10 +38,6 @@ void MLComputer::setcomputerselection()
 		else if (temp[i] == 3)
 			scissors_count++;
 	}
-
-	cout << "Rock: " << rock_count << endl;
-	cout << "Paper: " << paper_count << endl;
-	cout << "Scissors: " << scissors_count << endl;
 
 	if(rock_count > paper_count && rock_count > scissors_count)
 		computerselection = 2;
