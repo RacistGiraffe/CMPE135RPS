@@ -3,7 +3,7 @@
 
 class Computer {
 public:
-	virtual void setcomputerselection();
+	virtual void setcomputerselection() = 0;
 	unsigned int getcomputerselection();
 
 
