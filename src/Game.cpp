@@ -6,23 +6,36 @@
 #include "../include/Game.h"
 #include "../include/Player.h"
 #include "../include/Computer.h"
+#include "../include/ComputerFactory.h"
+#include "../include/History.h"
+
 using namespace std;
 
 void Game::play() {
 	srand((unsigned) time(0));
+	int botdiff;
 	Player player;
-	Computer computer;
+	History history;
 	unsigned int check;
+
+	cout << "Please select computer difficulty: " << endl;
+	cout << "1. Easy, 2. Hard" << endl;
+	cin >> botdiff;
+
+	Computer *computer;
+	computer = ComputerFactory::difficulty(botdiff);
+
 	for (int i = 0; i < 20; i++) {
 		cout << "Game #" << i + 1 << endl;
 		player.setplayerselection();
-		computer.setcomputerselection();
+		computer->setcomputerselection();
 		check = gameresult(player.getplayerselection(),
-				computer.getcomputerselection());
+				computer->getcomputerselection());
 		if (check == 1)
 			i--;
-		else if (check == 2){
-			cout << "Something went wrong, fatal error, ending program." << endl;
+		else if (check == 2) {
+			cout << "Something went wrong, fatal error, ending program."
+					<< endl;
 			break;
 		}
 	}

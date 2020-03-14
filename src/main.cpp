@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Game.h"
+#include "../include/Computer.h"
 using namespace std;
 
 /*
@@ -13,7 +14,6 @@ using namespace std;
  */
 
 //To run the game, simply build and run this file
-
 int main() {
 	Game newgame;
 	newgame.play();

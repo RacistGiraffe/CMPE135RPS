@@ -3,10 +3,11 @@
 
 class Computer {
 public:
-	void setcomputerselection();
+	virtual void setcomputerselection();
 	unsigned int getcomputerselection();
 
-private:
+
+protected:
 	unsigned int computerselection;
 };
 

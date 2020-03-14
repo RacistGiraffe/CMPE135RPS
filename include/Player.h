@@ -4,9 +4,9 @@
 class Player {
 public:
 	void setplayerselection();
-	unsigned int getplayerselection();
+	static unsigned int getplayerselection();
 private:
-	unsigned int playerselection;
+	static unsigned int playerselection;
 };
 
 #endif
