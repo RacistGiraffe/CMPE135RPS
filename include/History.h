@@ -6,6 +6,7 @@ public:
 	int *gethistory();
 	void updatehistory(int x, int y);
 	void addhistory(int index, int value);
+	void printhistory();
 
 private:
 	int history[5] = {0};

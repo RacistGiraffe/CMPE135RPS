@@ -16,3 +16,9 @@ void History::updatehistory(int x, int y) {
 	history[3] = y;
 	history[4] = x;
 }
+
+void History::printhistory() {
+	for(int i = 0; i < 5; i++) {
+		cout << "History[" << i << "]" << history[i] << endl;
+	}
+}
