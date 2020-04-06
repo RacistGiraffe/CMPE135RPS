@@ -17,6 +17,18 @@ void Game::play() {
 	Player player;
 	History history;
 	unsigned int check;
+	unsigned int select;
+	unsigned int round_count = 20;
+
+	cout << "1. Start Game \t" << "2. Change round count \t" << "3. Exit" << endl;
+	cin >> check;
+	if(check == 2) {
+		cout << "Please enter the new number of rounds: ";
+		cin >> round_count;
+	}
+
+	else if (check == 3)
+		return;
 
 	cout << "1. Easy \t" << "2. Hard" << endl;
 	cout << "Please select computer difficulty: ";
@@ -25,7 +37,7 @@ void Game::play() {
 	Computer *computer;
 	computer = ComputerFactory::difficulty(botdiff);
 
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < round_count; i++) {
 		cout << "Game #" << i + 1 << endl;
 		player.setplayerselection();
 		computer->setcomputerselection();
