@@ -52,7 +52,12 @@ void DemoFrame::on_about(wxCommandEvent& WXUNUSED(event))
     wxMessageBox(wxString::Format(
                     "This is a rock paper scissors game\n"
                     "built with %s\n"
-                    "and running under %s.",
+                    "and running under %s.\n",
+					"made by: \n"
+					"Omar Habra\n",
+					"Zachary Nguyen\n",
+					"Shalvin Prasad\n",
+					"Ryota Suzuki",
                     wxVERSION_STRING,
                     wxGetOsDescription()
                 ),

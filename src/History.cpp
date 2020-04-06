@@ -1,6 +1,7 @@
 #include "../include/History.h"
 #include <iostream>
 using namespace std;
+
 int *History::gethistory() {
 	return history;
 }

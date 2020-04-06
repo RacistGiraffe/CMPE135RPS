@@ -37,9 +37,9 @@ void Game::play() {
 		computer->setcomputerselection();
 		check = gameresult(player.getplayerselection(),
 				computer->getcomputerselection());
-		if (check == 1)
+		if (check == 3)
 			i--;
-		else if (check == 2) {
+		else if (check == 4) {
 			cout << "Something went wrong, fatal error, ending program."
 					<< endl;
 			break;
@@ -64,37 +64,37 @@ unsigned int Game::gameresult(unsigned int x, unsigned int y) {
 		if (y == 2) {
 			cout << "Game was lost" << endl << endl;
 			computerscore++;
-			return 0;
+			return 2;
 		} else if (y == 3) {
 			cout << "Game was won" << endl << endl;
 			playerscore++;
-			return 0;
+			return 1;
 		}
 	} else if (x == 2) {
 		if (y == 1) {
 			cout << "Game was won" << endl << endl;
 			playerscore++;
-			return 0;
+			return 1;
 		} else if (y == 3) {
 			cout << "Game was lost" << endl << endl;
 			computerscore++;
-			return 0;
+			return 2;
 		}
 	} else if (x == 3) {
 		if (y == 1) {
 			cout << "Game was lost" << endl << endl;
 			computerscore++;
-			return 0;
+			return 2;
 		} else if (y == 2) {
 			cout << "Game was won" << endl << endl;
 			playerscore++;
-			return 0;
+			return 1;
 		}
 	} else {
 		cout << "Invalid input, please enter a valid input" << endl << endl;
-		return 1;
+		return 3;
 	}
-	return 2;
+	return 4;
 }
 
 unsigned int Game::get_round() {

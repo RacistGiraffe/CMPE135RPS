@@ -108,6 +108,7 @@ void ButtonPanel::init()
 	computer_actual_sizer->AddSpacer(20);
 	computer_actual_panel->SetSizer(computer_actual_sizer);
 
+
 	wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
 	wxSizer *winner_sizer = new wxBoxSizer(wxHORIZONTAL);
 	wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY,
@@ -193,7 +194,7 @@ void ButtonPanel::init()
 	main_panel_sizer->AddSpacer(5);
 	main_panel_sizer->Add(computer_predict_panel, 0, wxALIGN_LEFT, 0);
 	main_panel_sizer->AddSpacer(5);
-	main_panel_sizer->Add(computer_actual_panel, 0, wxALIGN_LEFT, 0);
+	main_panel_sizer->Add(computer_actual_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(20);
 	main_panel_sizer->Add(winner_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(20);
@@ -238,9 +239,6 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 
     update_computer_actual_text(ROCK);
 
-    round_counter++;
-
-    round_count_value->SetLabelText(std::to_string(round_counter));
     /*if(round_counter % 3 == 0) {
     	update_computer_choice_text(ROCK);
     	update_computer_actual_text(PAPER);
@@ -265,36 +263,46 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 
 void ButtonPanel::update_computer_choice_text(const Choice choice)
 {
-    computer_choice_value->SetLabelText(choice_to_wxString(choice));
+	//int temp = RPS->computer->get_guess();
+	int temp = 1;
+	if(temp == 1)
+		computer_choice_value->SetLabelText(choice_to_wxString(ROCK));
+	else if (temp == 2)
+		computer_choice_value->SetLabelText(choice_to_wxString(PAPER));
+	else if (temp == 3)
+		computer_choice_value->SetLabelText(choice_to_wxString(SCISSORS));
+	else
+		computer_choice_value->SetLabelText(choice_to_wxString(NONE));
 }
 
 void ButtonPanel::update_computer_actual_text(const Choice choice)
 {
     RPS->computer->setcomputerselection();
     int temp = RPS->computer->getcomputerselection();
-    if(temp == 0)
+    if(temp == 1)
     	computer_actual_value->SetLabelText(choice_to_wxString(ROCK));
-    else if (temp == 1)
-    	computer_actual_value->SetLabelText(choice_to_wxString(PAPER));
     else if (temp == 2)
+    	computer_actual_value->SetLabelText(choice_to_wxString(PAPER));
+    else if (temp == 3)
     	computer_actual_value->SetLabelText(choice_to_wxString(SCISSORS));
 }
 
 void ButtonPanel::update_winner(int x)
 {
+    round_counter++;
 	int temp = RPS->gameresult(RPS->player.getplayerselection(), RPS->computer->getcomputerselection());
-	if(temp == 0) {
-		update_statistics(temp);
-	}
+	if(temp == 0)
+		winner->SetLabelText("Tie");
 	else if (temp == 1)
-		update_statistics(temp);
-	else
-		update_statistics(temp);
-	winner->SetLabelText(choice_to_wxString(x));
+		winner->SetLabelText("Player");
+	else if (temp == 2)
+		winner->SetLabelText("Computer");
+    round_count_value->SetLabelText(std::to_string(round_counter));
+	update_statistics(temp);
 }
 
 void ButtonPanel::update_statistics(int x){
-	if(x == 0) {
+	if(x == 2) {
 		player_wins_count->SetLabelText(std::to_string(RPS->get_player_score()));
 	}
 

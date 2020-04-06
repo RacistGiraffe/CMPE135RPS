@@ -6,7 +6,6 @@ public:
 	virtual void setcomputerselection() = 0;
 	unsigned int getcomputerselection();
 
-
 protected:
 	unsigned int computerselection;
 };
