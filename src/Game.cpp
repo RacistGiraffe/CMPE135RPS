@@ -17,7 +17,6 @@ void Game::play() {
 	Player player;
 	History history;
 	unsigned int check;
-	unsigned int select;
 	unsigned int round_count = 20;
 
 	cout << "1. Start Game \t" << "2. Change round count \t" << "3. Exit" << endl;

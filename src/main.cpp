@@ -14,8 +14,10 @@ using namespace std;
 
 //To run the game, simply build and run this file
 
-int main() {
+/*int main() {
 	Game newgame;
 	newgame.play();
+	cout << "Thanks for playing!" << endl;
 	return 0;
-}
+}*/
+
