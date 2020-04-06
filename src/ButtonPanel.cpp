@@ -230,16 +230,18 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
     chosen_button_name->SetLabelText(choice_to_wxString(choice));
 
     if(choice == ROCK)
-    	RPS->player.setplayerselection(0);
-    else if (choice == PAPER)
     	RPS->player.setplayerselection(1);
-    else
+    else if (choice == PAPER)
     	RPS->player.setplayerselection(2);
+    else
+    	RPS->player.setplayerselection(3);
 
+    update_computer_actual_text(ROCK);
 
     round_counter++;
+
     round_count_value->SetLabelText(std::to_string(round_counter));
-    if(round_counter % 3 == 0) {
+    /*if(round_counter % 3 == 0) {
     	update_computer_choice_text(ROCK);
     	update_computer_actual_text(PAPER);
         update_statistics(0);
@@ -256,7 +258,7 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
     	update_computer_actual_text(ROCK);
         update_statistics(2);
 
-	}
+	}*/
 
     update_winner(0);
 }
@@ -268,27 +270,40 @@ void ButtonPanel::update_computer_choice_text(const Choice choice)
 
 void ButtonPanel::update_computer_actual_text(const Choice choice)
 {
-    computer_actual_value->SetLabelText(choice_to_wxString(choice));
+    RPS->computer->setcomputerselection();
+    int temp = RPS->computer->getcomputerselection();
+    if(temp == 0)
+    	computer_actual_value->SetLabelText(choice_to_wxString(ROCK));
+    else if (temp == 1)
+    	computer_actual_value->SetLabelText(choice_to_wxString(PAPER));
+    else if (temp == 2)
+    	computer_actual_value->SetLabelText(choice_to_wxString(SCISSORS));
 }
 
 void ButtonPanel::update_winner(int x)
 {
-	//int temp = RPS->gameresult(RPS->player.getplayerselection(), RPS->computer->getcomputerselection());
+	int temp = RPS->gameresult(RPS->player.getplayerselection(), RPS->computer->getcomputerselection());
+	if(temp == 0) {
+		update_statistics(temp);
+	}
+	else if (temp == 1)
+		update_statistics(temp);
+	else
+		update_statistics(temp);
 	winner->SetLabelText(choice_to_wxString(x));
 }
 
 void ButtonPanel::update_statistics(int x){
 	if(x == 0) {
-		player_wins_count->SetLabelText("Player");
+		player_wins_count->SetLabelText(std::to_string(RPS->get_player_score()));
 	}
 
 	else if (x == 1) {
-		computer_wins_count->SetLabelText("Computer");
-
+		computer_wins_count->SetLabelText(std::to_string(RPS->get_computer_score()));
 	}
 
 	else {
-		tie_count->SetLabelText("Tie");
+		tie_count->SetLabelText(std::to_string(RPS->get_tie_score()));
 
 	}
 }

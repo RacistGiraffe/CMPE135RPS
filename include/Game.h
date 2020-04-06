@@ -13,9 +13,14 @@ public:
 	History history;
 	Computer *computer = ComputerFactory::difficulty(2);
 	unsigned int gameresult(unsigned int x, unsigned int y);
-
+	unsigned int get_round();
+	unsigned int update_round(int x);
+	unsigned int get_player_score();
+	unsigned int get_computer_score();
+	unsigned int get_tie_score();
 
 private:
+	unsigned int round_count = 0;
 	unsigned int playerscore = 0;
 	unsigned int computerscore = 0;
 	unsigned int tiescore = 0;

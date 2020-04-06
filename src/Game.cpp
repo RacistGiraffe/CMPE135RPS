@@ -15,7 +15,6 @@ void Game::play() {
 	srand((unsigned) time(0));
 	int botdiff;
 	unsigned int check;
-	unsigned int round_count = 20;
 
 	cout << "1. Start Game \t" << "2. Change round count \t" << "3. Exit" << endl;
 	cin >> check;
@@ -96,4 +95,22 @@ unsigned int Game::gameresult(unsigned int x, unsigned int y) {
 		return 1;
 	}
 	return 2;
+}
+
+unsigned int Game::get_round() {
+	return round_count;
+}
+
+unsigned int Game::update_round(int x) {
+	round_count = x;
+}
+
+unsigned int Game::get_player_score(){
+	return playerscore;
+}
+unsigned int Game::get_computer_score(){
+	return computerscore;
+}
+unsigned int Game::get_tie_score(){
+	return tiescore;
 }
