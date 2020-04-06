@@ -212,6 +212,7 @@ void ButtonPanel::init()
 void ButtonPanel::on_rock(wxCommandEvent& event)
 {
     update_button_choice_text(ROCK);
+
 }
 
 void ButtonPanel::on_paper(wxCommandEvent& event)
@@ -227,6 +228,15 @@ void ButtonPanel::on_scissors(wxCommandEvent& event)
 void ButtonPanel::update_button_choice_text(const Choice choice)
 {
     chosen_button_name->SetLabelText(choice_to_wxString(choice));
+
+    if(choice == ROCK)
+    	RPS->player.setplayerselection(0);
+    else if (choice == PAPER)
+    	RPS->player.setplayerselection(1);
+    else
+    	RPS->player.setplayerselection(2);
+
+
     round_counter++;
     round_count_value->SetLabelText(std::to_string(round_counter));
     if(round_counter % 3 == 0) {
@@ -263,6 +273,7 @@ void ButtonPanel::update_computer_actual_text(const Choice choice)
 
 void ButtonPanel::update_winner(int x)
 {
+	//int temp = RPS->gameresult(RPS->player.getplayerselection(), RPS->computer->getcomputerselection());
 	winner->SetLabelText(choice_to_wxString(x));
 }
 

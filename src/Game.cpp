@@ -14,8 +14,6 @@ using namespace std;
 void Game::play() {
 	srand((unsigned) time(0));
 	int botdiff;
-	Player player;
-	History history;
 	unsigned int check;
 	unsigned int round_count = 20;
 
@@ -33,12 +31,10 @@ void Game::play() {
 	cout << "Please select computer difficulty: ";
 	cin >> botdiff;
 
-	Computer *computer;
-	computer = ComputerFactory::difficulty(botdiff);
 
 	for (int i = 0; i < round_count; i++) {
 		cout << "Game #" << i + 1 << endl;
-		player.setplayerselection();
+		//player.setplayerselection();
 		computer->setcomputerselection();
 		check = gameresult(player.getplayerselection(),
 				computer->getcomputerselection());

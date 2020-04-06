@@ -17,6 +17,7 @@ public:
      */
     ButtonPanel(wxFrame *parent) : wxPanel(parent, wxID_ANY)
     {
+    	RPS = new Game;
         init();
     }
 
@@ -39,6 +40,7 @@ public:
     void on_scissors(wxCommandEvent& event);
 
 private:
+    Game *RPS;
     wxStaticText *chosen_button_name;
     wxStaticText *round_count_value;
     wxStaticText *computer_choice_value;

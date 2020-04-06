@@ -3,7 +3,7 @@
 
 class Player {
 public:
-	void setplayerselection();
+	void setplayerselection(int x);
 	static unsigned int getplayerselection();
 private:
 	static unsigned int playerselection;
