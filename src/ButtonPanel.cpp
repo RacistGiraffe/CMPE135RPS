@@ -246,8 +246,8 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 
 void ButtonPanel::update_computer_choice_text(const Choice choice)
 {
-	//int temp = RPS->computer->get_guess();
-	int temp = 1;
+	int temp = RPS->computer->get_guess();
+	//int temp = 1;
 	if(temp == 1)
 		computer_choice_value->SetLabelText(choice_to_wxString(ROCK));
 	else if (temp == 2)

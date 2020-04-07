@@ -41,20 +41,20 @@ void MLComputer::setcomputerselection()
 
 	if(rock_count > paper_count && rock_count > scissors_count){
 		computerselection = 2;
-		//update_guess(1);
+		guess = 1;
 	}
 	else if (paper_count > rock_count && paper_count > scissors_count) {
 		computerselection = 3;
-		//update_guess(2);
+		guess = 2;
 	}
 	else if (scissors_count > rock_count && scissors_count > paper_count) {
 		computerselection = 1;
-		//update_guess(3);
+		guess = 3;
 	}
 	else{
 		srand((unsigned) time(0));
 		computerselection = (rand() % 3) + 1;
-		//update_guess(4);
+		guess = 4;
 	}
 
 	history.updatehistory(Player::getplayerselection(), computerselection);
