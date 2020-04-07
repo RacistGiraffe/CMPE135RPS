@@ -211,7 +211,7 @@ void ButtonPanel::init()
 //If rock
 void ButtonPanel::on_rock(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(ROCK);
 	else
 		game_over();
@@ -221,7 +221,7 @@ void ButtonPanel::on_rock(wxCommandEvent& event)
 //If paper
 void ButtonPanel::on_paper(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(PAPER);
 	else
 		game_over();
@@ -230,7 +230,7 @@ void ButtonPanel::on_paper(wxCommandEvent& event)
 //If scissors
 void ButtonPanel::on_scissors(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(SCISSORS);
 	else
 		game_over();
@@ -259,8 +259,7 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 //Once player selection is in, change the computer prediction
 void ButtonPanel::update_computer_choice_text(const Choice choice)
 {
-	round_counter++;
-	round_count_value->SetLabelText(std::to_string(round_counter));
+
 	int temp = RPS->computer->get_guess();
 	if(temp == 1)
 		computer_choice_value->SetLabelText(choice_to_wxString(ROCK));
@@ -306,6 +305,14 @@ void ButtonPanel::update_statistics(int x){
 		player_wins_count->SetLabelText(std::to_string(RPS->get_player_score()));
 	else
 		tie_count->SetLabelText(std::to_string(RPS->get_tie_score()));
+	if(round_counter == RPS->get_round_count()){
+		round_counter++;
+		game_over();
+	}
+	else {
+		round_counter++;
+		round_count_value->SetLabelText(std::to_string(round_counter));
+	}
 }
 
 //Function called to change round count to new value

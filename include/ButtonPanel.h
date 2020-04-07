@@ -59,7 +59,7 @@ private:
     wxStaticText *player_wins_count;
     wxStaticText *computer_wins_count;
     wxStaticText *tie_count;
-    int round_counter = 0;
+    int round_counter = 1;
 
 
     /**
