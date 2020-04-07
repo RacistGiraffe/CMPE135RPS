@@ -80,6 +80,7 @@ void ButtonPanel::init()
 	computer_sizer->AddSpacer(20);
 	computer_panel->SetSizer(computer_sizer);
 
+	//Computer Prediction panel
 	wxPanel *computer_predict_panel = new wxPanel(this, wxID_ANY);
 	wxSizer *computer_predict_sizer = new wxBoxSizer(wxHORIZONTAL);
 	wxStaticText *computer_predict_text = new wxStaticText(computer_predict_panel, wxID_ANY,
@@ -94,6 +95,7 @@ void ButtonPanel::init()
 	computer_predict_sizer->AddSpacer(20);
 	computer_predict_panel->SetSizer(computer_predict_sizer);
 
+	//Computer selection panel
 	wxPanel *computer_actual_panel = new wxPanel(this, wxID_ANY);
 	wxSizer *computer_actual_sizer = new wxBoxSizer(wxHORIZONTAL);
 	wxStaticText *computer_actual_text = new wxStaticText(computer_actual_panel, wxID_ANY,
@@ -192,7 +194,7 @@ void ButtonPanel::init()
     main_panel_sizer->AddSpacer(20);
     main_panel_sizer->Add(computer_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(5);
-	main_panel_sizer->Add(computer_predict_panel, 0, wxALIGN_LEFT, 0);
+	main_panel_sizer->Add(computer_predict_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(5);
 	main_panel_sizer->Add(computer_actual_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(20);
@@ -238,26 +240,7 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
     	RPS->player.setplayerselection(3);
 
     update_computer_actual_text(ROCK);
-
-    /*if(round_counter % 3 == 0) {
-    	update_computer_choice_text(ROCK);
-    	update_computer_actual_text(PAPER);
-        update_statistics(0);
-
-    }
-    else if (round_counter % 3 == 1) {
-    	update_computer_choice_text(PAPER);
-    	update_computer_actual_text(SCISSORS);
-        update_statistics(1);
-
-    }
-    else {
-    	update_computer_choice_text(SCISSORS);
-    	update_computer_actual_text(ROCK);
-        update_statistics(2);
-
-	}*/
-
+    update_computer_choice_text(ROCK);
     update_winner(0);
 }
 
