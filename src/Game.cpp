@@ -21,6 +21,7 @@ void Game::play() {
 	if(check == 2) {
 		cout << "Please enter the new number of rounds: ";
 		cin >> round_count;
+		update_round_count(round_count);
 	}
 
 	else if (check == 3)
@@ -97,12 +98,12 @@ unsigned int Game::gameresult(unsigned int x, unsigned int y) {
 	return 4;
 }
 
-unsigned int Game::get_round() {
-	return round_count;
+unsigned int Game::get_round_count() {
+	return roundcount;
 }
 
-unsigned int Game::update_round(int x) {
-	round_count = x;
+unsigned int Game::update_round_count(int x) {
+	roundcount = x;
 }
 
 unsigned int Game::get_player_score(){
@@ -113,4 +114,10 @@ unsigned int Game::get_computer_score(){
 }
 unsigned int Game::get_tie_score(){
 	return tiescore;
+}
+
+void Game::reset_scores() {
+	playerscore = 0;
+	computerscore = 0;
+	tiescore = 0;
 }

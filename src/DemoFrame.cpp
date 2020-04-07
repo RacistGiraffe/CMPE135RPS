@@ -3,7 +3,8 @@
 wxBEGIN_EVENT_TABLE(DemoFrame, wxFrame)
     EVT_MENU(RPS_About, DemoFrame::on_about)
     EVT_MENU(RPS_Quit,  DemoFrame::on_quit)
-	EVT_MENU(ID_Restart, DemoFrame::on_restart)
+	EVT_MENU(ID_Restart, DemoFrame::on_new_game)
+	EVT_MENU(ID_Setrounds, DemoFrame::on_set)
 wxEND_EVENT_TABLE()
 const int SIDE_MARGINS = 40;
 DemoFrame::DemoFrame(const wxString& title)
@@ -38,7 +39,8 @@ void DemoFrame::init_menu_bar()
     wxMenu *fileMenu = new wxMenu;
     fileMenu->Append(RPS_Quit,  "&Exit\tAlt-X", "Quit program");
     wxMenu *gameMenu = new wxMenu;
-    gameMenu->Append(ID_Restart, "&Restart\tAlt-R",   "Restart game");
+    gameMenu->Append(ID_Setrounds, "Set Rounds");
+    gameMenu->Append(ID_Restart, "New game");
     wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(RPS_About, "&About\tF1",   "Show about dialog");
     wxMenuBar *menuBar = new wxMenuBar();
@@ -53,11 +55,6 @@ void DemoFrame::on_about(wxCommandEvent& WXUNUSED(event))
                     "This is a rock paper scissors game\n"
                     "built with %s\n"
                     "and running under %s.\n",
-					"made by: \n"
-					"Omar Habra\n",
-					"Zachary Nguyen\n",
-					"Shalvin Prasad\n",
-					"Ryota Suzuki",
                     wxVERSION_STRING,
                     wxGetOsDescription()
                 ),
@@ -69,8 +66,23 @@ void DemoFrame::on_quit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);  // true is to force the frame to close
 }
-void DemoFrame::on_restart(wxCommandEvent& WXUNUSED(event))
+void DemoFrame::on_new_game(wxCommandEvent& WXUNUSED(event))
 {
-    //ButtonPanel::reset(); // make reset function and make all counter = 0;
-    //restart game
+	button_panel->new_game_screen();
 }
+
+void DemoFrame::on_set(wxCommandEvent& WXUNUSED(event))
+{
+    wxString roundsString;
+    wxTextEntryDialog new_rounds;
+    new_rounds.Create(this, "Enter the new number of rounds you want to play");
+    new_rounds.ShowModal();
+    roundsString = new_rounds.GetValue();
+    int rounds = wxAtoi(roundsString);
+    wxMessageBox(wxString::Format("Beginning new game, press 'OK' to start\n"));
+    button_panel->new_game();
+    button_panel->update_round_count(rounds);
+}
+
+
+

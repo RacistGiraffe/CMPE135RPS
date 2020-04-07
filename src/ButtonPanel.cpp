@@ -13,11 +13,10 @@ void ButtonPanel::init()
     round_sizer->AddSpacer(20);
 
     // Panel to display current round
-    round_count_value = new wxStaticText(round_panel, wxID_ANY, "");
+    round_count_value = new wxStaticText(round_panel, wxID_ANY, "1");
     round_count_value->SetFont(round_count_value->GetFont().Larger());
     round_sizer->Add(round_count_value, 0, 0, 0);
     round_sizer->AddSpacer(20);
-
     round_panel->SetSizer(round_sizer);
 
     // Human Panel
@@ -27,11 +26,9 @@ void ButtonPanel::init()
     human_text->SetFont(human_text->GetFont().Larger());
     human_sizer->Add(human_text, 0, 0, 0);
     human_sizer->AddSpacer(20);
-
     human_panel->SetSizer(human_sizer);
 
     // Button panel
-
     wxPanel *button_panel = new wxPanel(this, wxID_ANY);
     wxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -58,15 +55,12 @@ void ButtonPanel::init()
     button_panel->SetSizer(button_sizer);
 
     // Choice panel
-
     wxPanel *choice_panel = new wxPanel(this, wxID_ANY);
     wxSizer *choice_sizer = new wxGridSizer(2, 0, 5);
-
     wxStaticText *chosen_object_label =
             new wxStaticText(choice_panel, wxID_ANY, "Human chooses: ");
     chosen_button_name = new wxStaticText(choice_panel, wxID_ANY, "");
     chosen_button_name->SetFont(chosen_button_name->GetFont().Larger());
-
     choice_sizer->Add(chosen_object_label, 0, wxALIGN_RIGHT, 0);
     choice_sizer->Add(chosen_button_name, 0, 0, 0);
     choice_panel->SetSizer(choice_sizer);
@@ -89,6 +83,7 @@ void ButtonPanel::init()
 	computer_predict_sizer->Add(computer_predict_text, 0, wxALIGN_RIGHT, 0);
 	computer_predict_sizer->AddSpacer(5);
 
+	//Used to display prediction
 	computer_choice_value = new wxStaticText(computer_predict_panel, wxID_ANY, "");
 	computer_choice_value->SetFont(computer_choice_value->GetFont().Larger());
 	computer_predict_sizer->Add(computer_choice_value, 0, 0, 0);
@@ -104,13 +99,14 @@ void ButtonPanel::init()
 	computer_actual_sizer->Add(computer_actual_text, 0, wxALIGN_RIGHT, 0);
 	computer_actual_sizer->AddSpacer(20);
 
+	//Used to display computer selection
 	computer_actual_value = new wxStaticText(computer_actual_panel, wxID_ANY, "");
 	computer_actual_value->SetFont(computer_actual_value->GetFont().Larger());
 	computer_actual_sizer->Add(computer_actual_value, 0, 0, 0);
 	computer_actual_sizer->AddSpacer(20);
 	computer_actual_panel->SetSizer(computer_actual_sizer);
 
-
+	//Winner panel
 	wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
 	wxSizer *winner_sizer = new wxBoxSizer(wxHORIZONTAL);
 	wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY,
@@ -119,12 +115,12 @@ void ButtonPanel::init()
 	winner_sizer->Add(winner_text, 0, wxALIGN_CENTER, 0);
 	winner_sizer->AddSpacer(20);
 
+	//Used to display winner
 	winner = new wxStaticText(winner_panel, wxID_ANY, "");
 	winner->SetFont(winner->GetFont().Larger());
 	winner_sizer->Add(winner, 0, 0, 0);
 	winner_sizer->AddSpacer(20);
 	winner_panel->SetSizer(winner_sizer);
-
 	winner_panel->SetSizer(winner_sizer);
 
 	// Statistics panel
@@ -145,6 +141,7 @@ void ButtonPanel::init()
 	player_wins_sizer->Add(player_wins_text, 0, wxALIGN_CENTER, 0);
 	player_wins_sizer->AddSpacer(20);
 
+	//Used to display count for player wins
 	player_wins_count = new wxStaticText(player_wins_panel, wxID_ANY, "");
 	player_wins_count->SetFont(player_wins_count->GetFont().Larger());
 	player_wins_sizer->Add(player_wins_count, 0, 0, 0);
@@ -160,6 +157,7 @@ void ButtonPanel::init()
 	computer_wins_sizer->Add(computer_wins_text, 0, wxALIGN_CENTER, 0);
 	computer_wins_sizer->AddSpacer(20);
 
+	//Used to display count for computer wins
 	computer_wins_count = new wxStaticText(computer_wins_panel, wxID_ANY, "");
 	computer_wins_count->SetFont(computer_wins_count->GetFont().Larger());
 	computer_wins_sizer->Add(computer_wins_count, 0, 0, 0);
@@ -175,13 +173,12 @@ void ButtonPanel::init()
 	tie_sizer->Add(tie_text, 0, wxALIGN_CENTER, 0);
 	tie_sizer->AddSpacer(20);
 
+	//Used to display count for ties
 	tie_count = new wxStaticText(tie_panel, wxID_ANY, "");
 	tie_count->SetFont(tie_count->GetFont().Larger());
 	tie_sizer->Add(tie_count, 0, 0, 0);
 	tie_sizer->AddSpacer(20);
 	tie_panel->SetSizer(tie_sizer);
-
-
 
     // Main panel
     main_panel_sizer->Add(round_panel, 0, wxALIGN_CENTER, 0);
@@ -208,30 +205,44 @@ void ButtonPanel::init()
 	main_panel_sizer->AddSpacer(5);
 	main_panel_sizer->Add(tie_panel, 0, wxALIGN_CENTER, 0);
 	main_panel_sizer->AddSpacer(5);
-
     SetSizer(main_panel_sizer);
 }
 
+//If rock
 void ButtonPanel::on_rock(wxCommandEvent& event)
 {
-    update_button_choice_text(ROCK);
+	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+		update_button_choice_text(ROCK);
+	else
+		game_over();
 
 }
 
+//If paper
 void ButtonPanel::on_paper(wxCommandEvent& event)
 {
-    update_button_choice_text(PAPER);
+	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+		update_button_choice_text(PAPER);
+	else
+		game_over();
 }
 
+//If scissors
 void ButtonPanel::on_scissors(wxCommandEvent& event)
 {
-    update_button_choice_text(SCISSORS);
+	if(round_counter >= 0 && round_counter < RPS->get_round_count())
+		update_button_choice_text(SCISSORS);
+	else
+		game_over();
 }
 
+//What to do after selecting a button
 void ButtonPanel::update_button_choice_text(const Choice choice)
 {
+	//Change label
     chosen_button_name->SetLabelText(choice_to_wxString(choice));
 
+    //Update player selection
     if(choice == ROCK)
     	RPS->player.setplayerselection(1);
     else if (choice == PAPER)
@@ -239,15 +250,18 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
     else
     	RPS->player.setplayerselection(3);
 
+    //Following function calls (ROCK is unnecessarily passed)
     update_computer_actual_text(ROCK);
     update_computer_choice_text(ROCK);
     update_winner(0);
 }
 
+//Once player selection is in, change the computer prediction
 void ButtonPanel::update_computer_choice_text(const Choice choice)
 {
+	round_counter++;
+	round_count_value->SetLabelText(std::to_string(round_counter));
 	int temp = RPS->computer->get_guess();
-	//int temp = 1;
 	if(temp == 1)
 		computer_choice_value->SetLabelText(choice_to_wxString(ROCK));
 	else if (temp == 2)
@@ -258,6 +272,7 @@ void ButtonPanel::update_computer_choice_text(const Choice choice)
 		computer_choice_value->SetLabelText(choice_to_wxString(NONE));
 }
 
+//Change text of computer selection
 void ButtonPanel::update_computer_actual_text(const Choice choice)
 {
     RPS->computer->setcomputerselection();
@@ -270,9 +285,9 @@ void ButtonPanel::update_computer_actual_text(const Choice choice)
     	computer_actual_value->SetLabelText(choice_to_wxString(SCISSORS));
 }
 
+//Change winner
 void ButtonPanel::update_winner(int x)
 {
-    round_counter++;
 	int temp = RPS->gameresult(RPS->player.getplayerselection(), RPS->computer->getcomputerselection());
 	if(temp == 0)
 		winner->SetLabelText("Tie");
@@ -280,22 +295,43 @@ void ButtonPanel::update_winner(int x)
 		winner->SetLabelText("Player");
 	else if (temp == 2)
 		winner->SetLabelText("Computer");
-    round_count_value->SetLabelText(std::to_string(round_counter));
 	update_statistics(temp);
 }
 
+//Function call to update scores
 void ButtonPanel::update_statistics(int x){
-	if(x == 2) {
-		player_wins_count->SetLabelText(std::to_string(RPS->get_player_score()));
-	}
-
-	else if (x == 1) {
+	if(x == 2)
 		computer_wins_count->SetLabelText(std::to_string(RPS->get_computer_score()));
-	}
-
-	else {
+	else if (x == 1)
+		player_wins_count->SetLabelText(std::to_string(RPS->get_player_score()));
+	else
 		tie_count->SetLabelText(std::to_string(RPS->get_tie_score()));
-
-	}
 }
 
+//Function called to change round count to new value
+void ButtonPanel::update_round_count(int x) {
+	RPS->update_round_count(x);
+	new_game_screen();
+}
+
+//Function to clear all displays when starting new game
+void ButtonPanel::new_game_screen() {
+	round_counter = 0;
+	RPS->reset_scores();
+	round_count_value->SetLabelText(std::to_string(1));
+	chosen_button_name->SetLabelText("");
+	computer_choice_value->SetLabelText("");
+	computer_actual_value->SetLabelText("");
+	winner->SetLabelText("");
+	player_wins_count->SetLabelText("");
+	computer_wins_count->SetLabelText("");
+	tie_count->SetLabelText("");
+
+}
+
+//Function to display game over
+void ButtonPanel::game_over() {
+	wxMessageBox(wxString::Format(
+			"Game over.\n"
+			"Select 'New Game' under 'Game' menu to start a new one\n"));
+}
