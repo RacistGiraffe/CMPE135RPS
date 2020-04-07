@@ -102,7 +102,7 @@ unsigned int Game::get_round_count() {
 	return roundcount;
 }
 
-unsigned int Game::update_round_count(int x) {
+void Game::update_round_count(int x) {
 	roundcount = x;
 }
 

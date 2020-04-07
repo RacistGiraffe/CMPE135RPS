@@ -54,7 +54,12 @@ void DemoFrame::on_about(wxCommandEvent& WXUNUSED(event))
     wxMessageBox(wxString::Format(
                     "This is a rock paper scissors game\n"
                     "built with %s\n"
-                    "and running under %s.\n",
+                    "and running under %s.\n"
+    				"Written by: \n"
+    				"Omar Habra\n"
+    				"Zachary Nguyen\n"
+    				"Shalvin Prasad\n"
+    				"Ryota Suzuki",
                     wxVERSION_STRING,
                     wxGetOsDescription()
                 ),
@@ -66,19 +71,22 @@ void DemoFrame::on_quit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);  // true is to force the frame to close
 }
+
+//Function to clear screen of values
 void DemoFrame::on_new_game(wxCommandEvent& WXUNUSED(event))
 {
 	button_panel->new_game_screen();
 }
 
+//Function to change max number of rounds. Forces a new game.
 void DemoFrame::on_set(wxCommandEvent& WXUNUSED(event))
 {
-    wxString roundsString;
+    wxString rounds_input;
     wxTextEntryDialog new_rounds;
     new_rounds.Create(this, "Enter the new number of rounds you want to play");
     new_rounds.ShowModal();
-    roundsString = new_rounds.GetValue();
-    int rounds = wxAtoi(roundsString);
+    rounds_input = new_rounds.GetValue();
+    int rounds = wxAtoi(rounds_input);
     wxMessageBox(wxString::Format("Beginning new game, press 'OK' to start\n"));
     button_panel->new_game();
     button_panel->update_round_count(rounds);

@@ -211,7 +211,7 @@ void ButtonPanel::init()
 //If rock
 void ButtonPanel::on_rock(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
+	if(round_counter >= 1 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(ROCK);
 	else
 		game_over();
@@ -221,7 +221,7 @@ void ButtonPanel::on_rock(wxCommandEvent& event)
 //If paper
 void ButtonPanel::on_paper(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
+	if(round_counter >= 1 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(PAPER);
 	else
 		game_over();
@@ -230,7 +230,7 @@ void ButtonPanel::on_paper(wxCommandEvent& event)
 //If scissors
 void ButtonPanel::on_scissors(wxCommandEvent& event)
 {
-	if(round_counter >= 0 && round_counter <= RPS->get_round_count())
+	if(round_counter >= 1 && round_counter <= RPS->get_round_count())
 		update_button_choice_text(SCISSORS);
 	else
 		game_over();
@@ -323,7 +323,7 @@ void ButtonPanel::update_round_count(int x) {
 
 //Function to clear all displays when starting new game
 void ButtonPanel::new_game_screen() {
-	round_counter = 0;
+	round_counter = 1;
 	RPS->reset_scores();
 	round_count_value->SetLabelText(std::to_string(1));
 	chosen_button_name->SetLabelText("");

@@ -14,7 +14,7 @@ public:
 	Computer *computer = ComputerFactory::difficulty(2);
 	unsigned int gameresult(unsigned int x, unsigned int y);
 	unsigned int get_round_count();
-	unsigned int update_round_count(int x);
+	void update_round_count(int x);
 	unsigned int get_player_score();
 	unsigned int get_computer_score();
 	unsigned int get_tie_score();
